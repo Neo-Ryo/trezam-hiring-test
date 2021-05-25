@@ -1,30 +1,57 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </div>
-  <router-view/>
+	<div class="navbar">
+		<ul class="ul-wrapper">
+			<router-link to="/" class="route">Home</router-link>
+			<router-link to="/dashboard" class="route">Dashboard</router-link>
+			<router-link to="/update" class="route">Update</router-link>
+		</ul>
+	</div>
+	<router-view />
 </template>
 
+<script>
+</script>
+
+
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+:root {
+	--main: #3fb27f;
+	--primary: #32475b;
 }
 
-#nav {
-  padding: 30px;
+body {
+	box-sizing: border-box;
+	margin: 0;
+}
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
+#app {
+	font-family: Avenir, Helvetica, Arial, sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	text-align: center;
+	color: #2c3e50;
+}
 
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+.navbar {
+	background-color: var(--main);
+	font-size: 22px;
+}
+
+.ul-wrapper {
+	display: flex;
+	justify-content: center;
+	margin: 0;
+	padding: 0;
+	height: 40px;
+}
+
+.route {
+	list-style: none;
+	margin: auto;
+}
+
+a {
+	color: aliceblue;
+	text-decoration: none;
 }
 </style>
