@@ -1,6 +1,8 @@
 <template>
 	<form action="" class="form-container">
-		<label for="givenName"> current name: {{ clientData.givenName }} </label>
+		<label for="givenName">
+			current name: {{ clientData.givenName }}, {{ userId }}
+		</label>
 		<input
 			class="input"
 			type="text"
@@ -17,17 +19,15 @@
 		<input class="input" type="text" />
 		<label for="givenName"> current email: {{ clientData.givenName }} </label>
 		<input class="input" type="text" />
-		<input type="submit" />
+		<input class="submit" type="submit" />
 	</form>
 </template>
 
 <script>
 export default {
-	props: {
-		idClient: String,
-	},
 	data() {
 		return {
+			userId: this.$route.params.id,
 			clientData: {
 				id: 1,
 				givenName: "SCH",
@@ -44,7 +44,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped lang="scss">
 .form-container {
 	background-color: var(--primary);
 	display: flex;
@@ -64,5 +64,20 @@ label {
 input {
 	width: 50%;
 	margin: auto;
+}
+
+.submit {
+	border: 1px solid var(--main);
+	background-color: transparent;
+	color: var(--main);
+	border-radius: 5px;
+	width: 100px;
+	height: 40px;
+	transition: 0.2s;
+	&:hover {
+		background-color: var(--main);
+		color: var(--primary);
+		transition: 0.2s;
+	}
 }
 </style>
