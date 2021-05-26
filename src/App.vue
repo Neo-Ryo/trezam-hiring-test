@@ -3,7 +3,6 @@
 		<ul class="ul-wrapper">
 			<router-link to="/" class="route">Home</router-link>
 			<router-link to="/dashboard" class="route">Dashboard</router-link>
-			<router-link to="/update" class="route">Update</router-link>
 		</ul>
 	</div>
 	<router-view />
