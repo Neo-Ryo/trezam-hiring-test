@@ -5,33 +5,40 @@
 			<router-link to="/add">add client</router-link>
 		</button>
 		<Array :clients="clients" />
+		{{ clients }}
 	</div>
 </template>
 
 <script>
+import Axios from "axios";
 import Array from "../components/Array.vue";
 
 export default {
 	components: { Array },
+	mounted() {
+		Axios.get("http://localhost:8000/users").then(
+			(res) => (this.clients = res.data)
+		);
+	},
 	data() {
 		return {
 			clients: [
-				{
-					id: 1,
-					givenName: "SCH",
-					firstName: "Marc",
-					birthday: "06/06/1986",
-					phone: "06.06.06.06.06",
-					email: "marco@email.com",
-				},
-				{
-					id: 2,
-					givenName: "SCH",
-					firstName: "Frank",
-					birthday: "06/10/1987",
-					phone: "06.06.06.06.06",
-					email: "frankus@email.com",
-				},
+				// {
+				// 	id: 1,
+				// 	givenName: "SCH",
+				// 	firstName: "Marc",
+				// 	birthday: "06/06/1986",
+				// 	phone: "06.06.06.06.06",
+				// 	email: "marco@email.com",
+				// },
+				// {
+				// 	id: 2,
+				// 	givenName: "SCH",
+				// 	firstName: "Frank",
+				// 	birthday: "06/10/1987",
+				// 	phone: "06.06.06.06.06",
+				// 	email: "frankus@email.com",
+				// },
 			],
 		};
 	},
