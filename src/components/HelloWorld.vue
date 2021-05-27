@@ -1,12 +1,16 @@
 <template>
 	<div class="hello">
-		<h1>{{ msg }}</h1>
-		<button @click="showContent">
-			{{
-				showInitialContent
-					? "You can now remove it"
-					: "click to see the initial content"
-			}}
+		<h1>{{ msg }} &#128293;</h1>
+		<p>
+			As it was my first Vue.js app, I kept the HelloWorld.vue component along
+			as it was the first template and I could refer to for my beginnings.
+		</p>
+		<p>
+			The interesting part is actually in the Dashboard section. Use the navbar
+			above to navigate there and enjoy &#128513;.
+		</p>
+		<button class="initial-content" @click="showContent">
+			{{ showInitialContent ? "You can now remove it" : "initial content" }}
 		</button>
 		<div v-if="showInitialContent">
 			<p>
@@ -135,5 +139,12 @@ li {
 }
 a {
 	color: #42b983;
+}
+
+.initial-content {
+	border: 1px solid var(--main);
+	border-radius: 5px;
+	background-color: transparent;
+	color: var(--main);
 }
 </style>
