@@ -1,5 +1,5 @@
 <template>
-	<div class="wrapper-array" v-if="clients">
+	<div class="wrapper-array" v-if="clients.length > 0">
 		<div class="client-wrapper" v-for="client in clients" :key="client._id">
 			<p class="client">{{ client.firstName }}</p>
 			<p class="client">{{ client.givenName }}</p>
@@ -11,6 +11,9 @@
 			<!-- </router-link> -->
 			<button class="delete" @click="goDelete(client._id)">X</button>
 		</div>
+	</div>
+	<div v-else class="wrapper-array">
+		<p class="no-client">You have no clients yet...</p>
 	</div>
 </template>
 
@@ -73,6 +76,10 @@ export default {
 	height: 50px;
 	width: 70px;
 	margin: auto 10px;
+}
+
+.no-client {
+	color: var(--primary);
 }
 
 .delete {
