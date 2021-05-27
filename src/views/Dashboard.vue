@@ -1,20 +1,16 @@
 <template>
 	<div class="dashboard">
 		<h1>Dashboard page!</h1>
-		<button class="add">
-			<router-link to="/add">add client</router-link>
-		</button>
-		<Array :clients="clients" />
-		{{ clients }}
+		<router-link class="add" to="/add">add new client</router-link>
+		<ClientBanner :clients="clients" />
 	</div>
 </template>
 
 <script>
 import Axios from "axios";
-import Array from "../components/Array.vue";
-
+import ClientBanner from "../components/ClientsBanner.vue";
 export default {
-	components: { Array },
+	components: { ClientBanner },
 	mounted() {
 		Axios.get("http://localhost:8000/users").then(
 			(res) => (this.clients = res.data)
@@ -22,24 +18,7 @@ export default {
 	},
 	data() {
 		return {
-			clients: [
-				// {
-				// 	id: 1,
-				// 	givenName: "SCH",
-				// 	firstName: "Marc",
-				// 	birthday: "06/06/1986",
-				// 	phone: "06.06.06.06.06",
-				// 	email: "marco@email.com",
-				// },
-				// {
-				// 	id: 2,
-				// 	givenName: "SCH",
-				// 	firstName: "Frank",
-				// 	birthday: "06/10/1987",
-				// 	phone: "06.06.06.06.06",
-				// 	email: "frankus@email.com",
-				// },
-			],
+			clients: [],
 		};
 	},
 };
@@ -57,8 +36,14 @@ export default {
 	background-color: var(--primary);
 	color: aliceblue;
 	border-radius: 5px;
-	height: 50px;
-	width: 70px;
 	margin: 20px auto;
+	padding: 20px;
+	transition: 0.2s;
+	&:hover {
+		border: 1px solid var(--primary);
+		background-color: transparent;
+		color: var(--primary);
+		transition: 0.2s;
+	}
 }
 </style>

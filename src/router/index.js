@@ -1,6 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import Home from '../views/Home.vue';
 import Update from '../views/Update.vue';
+import Delete from '../views/Delete.vue';
+import Add from '../views/Add.vue';
 
 const routes = [
   {
@@ -22,6 +24,16 @@ const routes = [
     path: '/update/:id',
     name: 'Update',
     component: Update,
+  },
+  {
+    path: '/add',
+    name: 'Add',
+    component: Add,
+  },
+  {
+    path: '/delete/:id',
+    name: 'Delete',
+    component: Delete,
   },
 ];
 
