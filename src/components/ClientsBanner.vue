@@ -3,7 +3,7 @@
 		<div class="client-wrapper" v-for="client in clients" :key="client._id">
 			<p class="client">{{ client.firstName }}</p>
 			<p class="client">{{ client.givenName }}</p>
-			<p class="client">{{ client.birthday }}</p>
+			<p class="client">{{ moment(client.birthday) }}</p>
 			<p class="client">{{ client.phone }}</p>
 			<p class="client">{{ client.email }}</p>
 			<!-- <router-link :to="{ name: 'update', params: { id: id } }" class="route"> -->
@@ -16,6 +16,7 @@
 
 <script>
 import router from "../router/";
+import moment from "moment";
 export default {
 	props: {
 		clients: Object,
@@ -26,6 +27,9 @@ export default {
 		},
 		goDelete: function (id) {
 			router.push(`/delete/${id}`);
+		},
+		moment: function (date) {
+			return moment(date).format("DD/MM/YYYY");
 		},
 	},
 };

@@ -5,6 +5,10 @@
 			class="input"
 			id="givenName"
 			type="text"
+			pattern="[a-zA-Z]+"
+			@invalid="
+				invalidField('given name should have only alphabets are alowed')
+			"
 			v-model="givenName"
 			placeholder="your given name..."
 			required
@@ -14,6 +18,10 @@
 			class="input"
 			id="firstName"
 			type="text"
+			pattern="[a-zA-Z]+"
+			@invalid="
+				invalidField('first name should have only alphabets are alowed')
+			"
 			v-model="firstName"
 			placeholder="your first name..."
 			required
@@ -35,7 +43,7 @@
 			pattern="[0-9]{2}-[0-9]{2}-[0-9]{2}-[0-9]{2}-[0-9]{2}"
 			required
 		/>
-		<small>Format: 06-11-11-11-11</small>
+		<small>Format: 06-XX-XX-XX-XX</small>
 		<label for="email">email: </label>
 		<input
 			class="input"
@@ -49,7 +57,7 @@
 			<p class="created">User succesfully created!</p>
 		</div>
 		<div v-if="isError">
-			<p v-for="error in errors" :key="error" class="error">
+			<p class="error">
 				{{ error }}
 			</p>
 		</div>
@@ -69,12 +77,11 @@ export default {
 			email: "",
 			isError: false,
 			isCreated: false,
-			errors: [],
+			error: "",
 		};
 	},
 	methods: {
 		submitForm: function () {
-			this.errors = [];
 			Axios.post("http://localhost:8000/users", {
 				givenName: this.givenName,
 				firstName: this.firstName,
@@ -82,11 +89,15 @@ export default {
 				phone: this.phone,
 				email: this.email,
 			})
-				.then((res) => (this.isCreated = true))
+				.then((res) => ((this.isCreated = true), (this.isError = false)))
 				.catch(
 					(err) => (this.isError = true),
-					this.errors.push("fields are missing or email already exist")
+					(this.error = "email already exist")
 				);
+		},
+		invalidField: function (str) {
+			this.isError = true;
+			this.error = str;
 		},
 	},
 };
