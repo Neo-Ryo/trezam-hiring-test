@@ -2,25 +2,14 @@
 	<div class="dashboard">
 		<h1>Dashboard page!</h1>
 		<router-link class="add" to="/add">add new client</router-link>
-		<ClientBanner :clients="clients" />
+		<ClientBanner />
 	</div>
 </template>
 
 <script>
-import Axios from "axios";
 import ClientBanner from "../components/ClientsBanner.vue";
 export default {
 	components: { ClientBanner },
-	mounted() {
-		Axios.get("http://localhost:8000/users").then(
-			(res) => (this.clients = res.data)
-		);
-	},
-	data() {
-		return {
-			clients: [],
-		};
-	},
 };
 </script>
 

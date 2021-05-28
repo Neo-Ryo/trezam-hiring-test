@@ -31,6 +31,8 @@
 			class="input"
 			id="birthday"
 			type="date"
+			min="1880-01-01"
+			max="2020-12-31"
 			v-model="birthday"
 			required
 		/>

@@ -9,7 +9,8 @@
 			<!-- <router-link :to="{ name: 'update', params: { id: id } }" class="route"> -->
 			<button class="modify" @click="goModify(client._id)">modify</button>
 			<!-- </router-link> -->
-			<button class="delete" @click="goDelete(client._id)">X</button>
+			<!-- <button class="delete" @click="goDelete(client._id)">X</button> -->
+			<button class="delete" @click="deleteClient(client._id)">X</button>
 		</div>
 	</div>
 	<div v-else class="wrapper-array">
@@ -18,18 +19,48 @@
 </template>
 
 <script>
+import Axios from "axios";
 import router from "../router/";
 import moment from "moment";
 export default {
-	props: {
-		clients: Object,
+	// props: {
+	// 	clients: Object,
+	// },
+	//test here
+	mounted() {
+		Axios.get("http://localhost:8000/users").then(
+			(res) => (this.clients = res.data)
+		);
 	},
+	data() {
+		return {
+			clients: [],
+		};
+	},
+	//test here
 	methods: {
 		goModify: function (id) {
 			router.push(`/update/${id}`);
 		},
 		goDelete: function (id) {
 			router.push(`/delete/${id}`);
+		},
+		deleteClient: async function (id) {
+			try {
+				const res = await Axios.delete(
+					`http://localhost:8000/users/${id}/delete`
+				);
+				alert(res.data.message);
+				const clientIndex = this.clients
+					.map(function (i) {
+						return i._id;
+					})
+					.indexOf(id);
+				this.clients.splice(clientIndex, 1);
+			} catch (error) {
+				alert("Can't delete for now...");
+				console.log(error);
+			}
 		},
 		moment: function (date) {
 			return moment(date).format("DD/MM/YYYY");
